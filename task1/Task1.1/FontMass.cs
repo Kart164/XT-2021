@@ -26,6 +26,7 @@ namespace Task1._1
         }
         public static void DoTask()
         {
+            Console.WriteLine("Task 1.1.6 Font Adjustment");
             int fontvalue;
             Fonts font = Fonts.None;
             bool escape_case = true;

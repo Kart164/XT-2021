@@ -16,13 +16,6 @@ namespace Task1._1
         }
         public void QuickSort(int leftIndex,int rightIndex)
         {
-            //if (leftIndex < rightIndex)
-            //{
-            //    var p = Partition(leftIndex, rightIndex);
-            //    QuickSort(leftIndex, p);
-            //    QuickSort(p + 1, rightIndex);
-            //    IsSorted = true;
-            //}
             var oldLeft = leftIndex;
             var oldRight = rightIndex;
             var piv = (mas[leftIndex] + mas[rightIndex]) / 2;
@@ -46,25 +39,7 @@ namespace Task1._1
                 QuickSort(leftIndex, oldRight);
             IsSorted = true;
         }
-        private int Partition(int left,int right)
-        {
-            var piv = (mas[left] + mas[right]) / 2;
-            var l = left;
-            var r = right;
-            var temp = 0;
-            while (true)
-            {
-                while (mas[l] < piv)
-                    l++;
-                while (mas[r] > piv)
-                    r--;
-                if (l >= r)
-                    return l;
-                temp = mas[l++];
-                mas[l] = mas[r--];
-                mas[r] = temp;
-            }
-        }
+        
         public void GenerateMassive()
         {
             var rand = new Random();

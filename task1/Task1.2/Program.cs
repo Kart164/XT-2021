@@ -6,9 +6,9 @@ namespace Task1._2
     {
         static void Main(string[] args)
         {
-            var escape = true;
+            var escape = false;
             int value;
-            while (escape)
+            while (!escape)
             {
                 PrintMenu();
                 while (!int.TryParse(Console.ReadLine(), out value))
@@ -32,7 +32,7 @@ namespace Task1._2
                         DoTask4();
                         break;
                     case 5:
-                        escape = false;
+                        escape = true;
                         break;
                 }
             }
@@ -43,7 +43,7 @@ namespace Task1._2
                 + Environment.NewLine + "\t2. Doubler" + Environment.NewLine + "\t3. Lowercase"
                 + Environment.NewLine + "\t4. Validator" + Environment.NewLine + "enter 5 to exit");
         }
-        private static void DoTask1()//дописать что решил не округлять
+        private static void DoTask1()//не округлял
         {
             Console.Write("Task 1.2.1 Averages"+Environment.NewLine+"Enter string:");
             var res=Averages.CalculateAvarageLenght(Console.ReadLine());

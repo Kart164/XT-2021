@@ -11,7 +11,8 @@ namespace Task1._1
             for (int i = 0; i < mas.GetLength(0); i++)
                 for (int j = 0; j < mas.GetLength(1); j++)
                     for (int k = 0; k < mas.GetLength(2); k++)
-                        if (mas[i, j, k] > 0) mas[i, j, k] = 0;
+                        if (mas[i, j, k] > 0)
+                            mas[i, j, k] = 0;
             return mas;
         }
         public static int[,,] FillArray(int[,,] mas)

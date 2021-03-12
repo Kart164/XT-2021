@@ -12,7 +12,7 @@ namespace Task1._2
             bool findpunc = false;
             var sb = new StringBuilder(str);
             sb[0] = char.ToUpper(sb[0]);
-            for (int i = 1; i < sb.Length; i++)
+            for (int i = 0; i < sb.Length; i++)
             {
                 if (!findpunc) {
                     if (punctuation.Contains(sb[i]))

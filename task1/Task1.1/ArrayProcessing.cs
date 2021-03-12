@@ -6,11 +6,11 @@ namespace Task1._1
 {
     public class ArrayProcessing
     {
-        public int[] mas { get; private set; }
+        public int[] Mas { get; private set; }
         public bool IsSorted { get; private set; }
         public ArrayProcessing(int n)
         {
-            mas = new int[n];
+            Mas = new int[n];
             GenerateMassive();
             IsSorted = false;
         }
@@ -18,18 +18,18 @@ namespace Task1._1
         {
             var oldLeft = leftIndex;
             var oldRight = rightIndex;
-            var piv = (mas[leftIndex] + mas[rightIndex]) / 2;
+            var piv = (Mas[leftIndex] + Mas[rightIndex]) / 2;
             while (leftIndex <= rightIndex)
             {
-                while (mas[leftIndex] < piv && leftIndex<=oldRight)
+                while (Mas[leftIndex] < piv && leftIndex<=oldRight)
                     ++leftIndex;
-                while (mas[rightIndex] > piv && rightIndex>=oldLeft)
+                while (Mas[rightIndex] > piv && rightIndex>=oldLeft)
                     --rightIndex;
                 if (leftIndex <= rightIndex)
                 {
-                    var temp = mas[leftIndex];
-                    mas[leftIndex] = mas[rightIndex];
-                    mas[rightIndex] = temp;
+                    var temp = Mas[leftIndex];
+                    Mas[leftIndex] = Mas[rightIndex];
+                    Mas[rightIndex] = temp;
                     ++leftIndex;--rightIndex;
                 }
             }
@@ -43,9 +43,9 @@ namespace Task1._1
         public void GenerateMassive()
         {
             var rand = new Random();
-            for (int i = 0; i < mas.Length; i++)
+            for (int i = 0; i < Mas.Length; i++)
             {
-                mas[i] = rand.Next(100);
+                Mas[i] = rand.Next(100);
             }
         }
         public int Max
@@ -53,14 +53,14 @@ namespace Task1._1
             get
             {
                 if (IsSorted)
-                    return mas[mas.Length - 1];
+                    return Mas[Mas.Length - 1];
                 else
                 {
-                    var max = mas[0];
-                    for (int i = 1; i < mas.Length; i++)
+                    var max = Mas[0];
+                    for (int i = 1; i < Mas.Length; i++)
                     {
-                        if (mas[i] > max)
-                            max = mas[i];
+                        if (Mas[i] > max)
+                            max = Mas[i];
                     }
                     return max;
                 }
@@ -72,14 +72,14 @@ namespace Task1._1
             get
             {
                 if (IsSorted)
-                    return mas[0];
+                    return Mas[0];
                 else
                 {
-                    var min = mas[0];
-                    for (int i = 1; i < mas.Length; i++)
+                    var min = Mas[0];
+                    for (int i = 1; i < Mas.Length; i++)
                     {
-                        if (mas[i] > min)
-                            min = mas[i];
+                        if (Mas[i] > min)
+                            min = Mas[i];
                     }
                     return min;
                 }
@@ -88,9 +88,9 @@ namespace Task1._1
 
         public void PrintMas()
         {
-            for (int i = 0; i < mas.Length; i++)
+            for (int i = 0; i < Mas.Length; i++)
             {
-                Console.Write($"{mas[i]} ");
+                Console.Write($"{Mas[i]} ");
             }
         }
     }

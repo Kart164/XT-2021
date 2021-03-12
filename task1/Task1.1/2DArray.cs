@@ -23,23 +23,18 @@ namespace Task1._1
             var sum = 0;
             for (int i = 0; i < mas.GetLength(0); i++)
             {
-                for (int j = 0; j < mas.GetLength(1); j++)
+                if (i % 2 == 0)
                 {
-                    if (i % 2 == 0)
+                    for (int j = 0; j < mas.GetLength(1); j += 2)
                     {
-                        if (j % 2 == 0)
-                        {
-                            sum += mas[i, j];
-                            j++;
-                        }
+                        sum += mas[i, j];
                     }
-                    else
+                }
+                else
+                {
+                    for (int j = 1; j < mas.GetLength(1); j += 2)
                     {
-                        if (j % 2 != 0)
-                        {
-                            sum += mas[i, j];
-                            j++;
-                        }
+                        sum += mas[i, j];
                     }
                 }
             }

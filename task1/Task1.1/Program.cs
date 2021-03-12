@@ -74,17 +74,21 @@ namespace Task1._1
                 +Environment.NewLine+"\t8. No Positive"+Environment.NewLine+"\t9. Non-Negative Sum"
                 +Environment.NewLine+"\t10. 2D Array"+Environment.NewLine+"Enter 11 to exit");
         }
- 
+        /* Написать программу, которая генерирует случайным образом элементы массива (число элементов в массиве и их тип определяются разработчиком),
+         * определяет для него максимальное и минимальное значения, сортирует массив и выводит полученный результат на экран.
+       Примечание: LINQ запросы и готовые функции языка (Sort, Max и т.д.) использовать в данном задании запрещается.*/
         private static void DoArrayPocessing()
         {
-            Console.WriteLine("Task1.1.7 Array Processing");
+            Console.WriteLine("Task 1.1.7 Array Processing");
             var arr = new ArrayProcessing(100);
             arr.PrintMas();
             Console.WriteLine(System.Environment.NewLine + "Sorted mass:");
-            arr.QuickSort(0, 100 - 1);
+            arr.QuickSort(0, arr.Mas.Length-1);
             arr.PrintMas();
             Console.WriteLine(System.Environment.NewLine + $"max = {arr.Max}, min = {arr.Min}");
         }
+        /*Написать программу, которая заменяет все положительные элементы в трёхмерном массиве на нули.
+         * Число элементов в массиве и их тип определяются разработчиком. */
         private static void DoNoPositive()
         {
             Console.WriteLine("Task 1.1.8 NO POSITIVE");
@@ -95,6 +99,8 @@ namespace Task1._1
             Console.WriteLine(Environment.NewLine+Environment.NewLine+"AFTER CHANGE:");
             NoPositive.Print(mas);  
         }
+        /*Написать программу, которая определяет сумму неотрицательных элементов в одномерном массиве.
+         * Число элементов в массиве и их тип определяются разработчиком. */
         private static void DoNonNegative()
         {
             Console.WriteLine("Task 1.1.9 Non-Negative Sum");
@@ -115,8 +121,8 @@ namespace Task1._1
         private static void Do2DArray()
         {
             Console.WriteLine("Task 1.1.10 2D Array");
-            var mas = new int[5,5];
-            mas=_2DArray.FillArray(mas);
+            var mas = new int[,]{ { 1, 0, 1, 0 },{ 0, 1, 0, 1 },{ 1, 0, 1, 0 },{ 0, 1, 0, 1 }  };
+            //mas=_2DArray.FillArray(mas);
             _2DArray.Print(mas);
             var sum = _2DArray.SumOfEvenPositions(mas);
             Console.WriteLine($"sum = {sum}");

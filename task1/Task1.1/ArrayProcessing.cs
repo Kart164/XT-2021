@@ -14,7 +14,11 @@ namespace Task1._1
             GenerateMassive();
             IsSorted = false;
         }
-        public void QuickSort(int leftIndex,int rightIndex)
+        public void QuickSort()
+        {
+            QuickSort(0, Mas.Length - 1);
+        }
+        private void QuickSort(int leftIndex,int rightIndex)
         {
             var oldLeft = leftIndex;
             var oldRight = rightIndex;

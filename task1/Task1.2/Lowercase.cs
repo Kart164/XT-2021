@@ -14,7 +14,7 @@ namespace Task1._2
                 var sb = new StringBuilder();
                 foreach (char c in str)
                 {
-                    if (char.IsLetter(c) || char.IsWhiteSpace(c))
+                    if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))
                         sb.Append(c);
                 }
                 var mas = (sb.ToString()).Split(' ', StringSplitOptions.RemoveEmptyEntries);

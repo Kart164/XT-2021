@@ -18,14 +18,15 @@ namespace Task1._2
                     if (punctuation.Contains(sb[i]))
                     {
                         findpunc = true;
-                        i++;
                     }
                 }
                 else
                 {
-                    sb[i] = char.ToUpper(sb[i]);
-                    findpunc = false;
-                    i++;
+                    if (char.IsLetter(sb[i]))
+                    {
+                        sb[i] = char.ToUpper(sb[i]);
+                        findpunc = false;
+                    }
                 }
             }
             return sb.ToString();

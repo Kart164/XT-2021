@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Task1._1
 {
+   
     public static class TasksWithFigures
     {
         /*Task1.1.1
@@ -14,9 +15,9 @@ namespace Task1._1
         {
             Console.WriteLine("Task1.1.1 Rectangle");
             Console.WriteLine("enter a: ");
-            var a = MakeConsoleInput(1);
+            var a = MakeConsoleInput(TypeOfInput.InputBigger0);
             Console.WriteLine("enter b: ");
-            var b = MakeConsoleInput(1);
+            var b = MakeConsoleInput(TypeOfInput.InputBigger0);
             var area = RectangleArea(a, b);
             Console.WriteLine($"rectangle area = {area}");
         }
@@ -31,7 +32,7 @@ namespace Task1._1
         {
                 Console.WriteLine("Task1.1.2 Triangle");
                 Console.WriteLine("enter n:");
-                var n = MakeConsoleInput(2);
+                var n = MakeConsoleInput(TypeOfInput.InputBiggerOrEquals0);
                 for (int i = 1; i <= n; i++)
                 {
                     for (int j = 1; j <= i; j++)
@@ -50,7 +51,7 @@ namespace Task1._1
         {
             Console.WriteLine("Task1.1.2 Another triangle");
             Console.WriteLine("enter n:");
-            var n = MakeConsoleInput(2);
+            var n = MakeConsoleInput(TypeOfInput.InputBiggerOrEquals0);
             PrintTriangle(1, n - 1, 0);
         }
         
@@ -58,7 +59,7 @@ namespace Task1._1
         {
             Console.WriteLine("Task1.1.4 Xmas Tree");
             Console.WriteLine("enter n:");
-            var n = MakeConsoleInput(2);
+            var n = MakeConsoleInput(TypeOfInput.InputBiggerOrEquals0);
             for (int i = 1; i <= n; i++)
                 PrintTriangle(1, n - 1, n - i);
         }
@@ -82,19 +83,18 @@ namespace Task1._1
         }
 
         private static Func<int, int, int> RectangleArea = (a, b) => a * b;
-        public static int MakeConsoleInput(int caseVal)
+        public static int MakeConsoleInput(TypeOfInput type)
         {
-
             int input;
-            switch (caseVal) {
-                case 1:
+            switch (type) {
+                case TypeOfInput.InputBigger0:
                     while (!int.TryParse(Console.ReadLine(), out input) || input < 1)
                     {
                         Console.WriteLine("incorrect input, please enter a positive number");
                         
                     }
                     return input;
-                case 2:
+                case    TypeOfInput.InputBiggerOrEquals0:
                     while (!int.TryParse(Console.ReadLine(), out input) || input < 0)
                     {
                         Console.WriteLine("incorrect input, please enter number>0");
@@ -105,5 +105,10 @@ namespace Task1._1
             }
             
         }
+        public enum TypeOfInput
+        {
+            InputBigger0=0,
+            InputBiggerOrEquals0=1
+        };
     }
 }

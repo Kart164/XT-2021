@@ -6,23 +6,21 @@ namespace Task1._1
 {
     public static class NoPositive
     {
-        public static int[,,] ChangeNums(int[,,] mas)
+        public static void ChangeNums(int[,,] mas)
         {
             for (int i = 0; i < mas.GetLength(0); i++)
                 for (int j = 0; j < mas.GetLength(1); j++)
                     for (int k = 0; k < mas.GetLength(2); k++)
                         if (mas[i, j, k] > 0)
                             mas[i, j, k] = 0;
-            return mas;
         }
-        public static int[,,] FillArray(int[,,] mas)
+        public static void FillArray(int[,,] mas)
         {
             Random rand = new Random();
             for (int i = 0; i < mas.GetLength(0); i++)
                 for (int j = 0; j < mas.GetLength(1); j++)
                     for (int k = 0; k < mas.GetLength(2); k++)
                         mas[i, j, k] = rand.Next(-100, 100);
-            return mas;
         }
         public static void Print(int[,,] mas)
         {

@@ -8,9 +8,9 @@ namespace Task1._1
     {
         static void Main(string[] args)
         {
-            var escape = true;
+            var escape = false;
             int value;
-            while (escape)
+            while (!escape)
             {
                 PrintMenu();
                 while(!int.TryParse(Console.ReadLine(),out value))
@@ -58,7 +58,7 @@ namespace Task1._1
                         Do2DArray();
                         break;
                     case 11:
-                        escape = false;
+                        escape = true;
                         break;
                     default:
                         break;
@@ -83,7 +83,7 @@ namespace Task1._1
             var arr = new ArrayProcessing(100);
             arr.PrintMas();
             Console.WriteLine(System.Environment.NewLine + "Sorted mass:");
-            arr.QuickSort(0, arr.Mas.Length-1);
+            arr.QuickSort();
             arr.PrintMas();
             Console.WriteLine(System.Environment.NewLine + $"max = {arr.Max}, min = {arr.Min}");
         }
@@ -93,9 +93,9 @@ namespace Task1._1
         {
             Console.WriteLine("Task 1.1.8 NO POSITIVE");
             var mas = new int[10, 10, 5];
-            mas = NoPositive.FillArray(mas);
+            NoPositive.FillArray(mas);
             NoPositive.Print(mas);
-            mas = NoPositive.ChangeNums(mas);
+            NoPositive.ChangeNums(mas);
             Console.WriteLine(Environment.NewLine+Environment.NewLine+"AFTER CHANGE:");
             NoPositive.Print(mas);  
         }
@@ -121,8 +121,8 @@ namespace Task1._1
         private static void Do2DArray()
         {
             Console.WriteLine("Task 1.1.10 2D Array");
-            var mas = new int[,]{ { 1, 0, 1, 0 },{ 0, 1, 0, 1 },{ 1, 0, 1, 0 },{ 0, 1, 0, 1 }  };
-            //mas=_2DArray.FillArray(mas);
+            var mas = new int[5,5];//{ { 1, 0, 1, 0 },{ 0, 1, 0, 1 },{ 1, 0, 1, 0 },{ 0, 1, 0, 1 }  };
+            _2DArray.FillArray(mas);
             _2DArray.Print(mas);
             var sum = _2DArray.SumOfEvenPositions(mas);
             Console.WriteLine($"sum = {sum}");

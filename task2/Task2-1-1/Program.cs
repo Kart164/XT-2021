@@ -7,12 +7,13 @@ namespace Task2_1_1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var str = new char[]{'a','b','c' };
-
+            var str = "abc";
             var cha = new StringAsCharArray(str);
-            str[0] = '0';
+            str = "bac";
             var cha2 = new StringAsCharArray(str);
+            cha.Concat(cha2);
             Console.WriteLine(cha.ToString());
+            Console.WriteLine(cha.Length);
         }
     }
 }

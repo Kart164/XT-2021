@@ -15,6 +15,7 @@ namespace UsefullThings
             get => _chars[i];
             set => _chars[i] = value;
         }
+        //создать пустой массив чар
         public StringAsCharArray():this(string.Empty)
         {
         }
@@ -42,17 +43,18 @@ namespace UsefullThings
             return sb.ToString();
         }
         public char[] ToCharArray() =>  MakeCopyOfCharArray();
-        public static StringAsCharArray ConvertFromCharArray(char[] array)
+        public static StringAsCharArray FromCharArray(char[] array)
         {
             return new StringAsCharArray(array);
         }
-        public static StringAsCharArray ConvertFromString(string str)
+        public static StringAsCharArray FromString(string str)
         {
             return new StringAsCharArray(str);
         }
 
 
         //block of Equals and Compare methods
+        //delete copypaste
         public override bool Equals(object obj)
         {
             if (obj is string str)
@@ -149,10 +151,10 @@ namespace UsefullThings
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(_chars, Length);
+            return HashCode.Combine(_chars);
         }
 
-
+        //make static methods from char[] for  this method
         public void Concat(StringAsCharArray value)
         {
             var temp = new char[Length + value.Length-1];
@@ -160,7 +162,7 @@ namespace UsefullThings
             {
                 temp[i] = this[i];
             }
-            for (int i = Length, j = 0; i < value.Length+Length; i++, j++)
+            for (int i = Length-1, j = 0; i < value.Length+Length; i++, j++)
             {
                 temp[i] = value[j];
             }
@@ -173,7 +175,7 @@ namespace UsefullThings
             {
                 temp[i] = this[i];
             }
-            for (int i = Length, j = 0; i < value.Length + Length; i++, j++)
+            for (int i = Length-1, j = 0; i < value.Length + Length; i++, j++)
             {
                 temp[i] = value[j];
             }

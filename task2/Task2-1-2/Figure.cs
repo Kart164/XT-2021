@@ -6,15 +6,16 @@ namespace Task2_1_2
 {
     abstract public class Figure
     {
-        public FigureType Type { get; protected set; } = FigureType.Figure;
+        public abstract FigureType Type { get; }
+        protected Figure() { }
     }
 
     public enum FigureType
     {
         Figure,
         Line,
-        Circle,
         Round,
+        Circle,
         Ring,
         Square,
         Rectangle,

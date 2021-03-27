@@ -17,17 +17,21 @@ namespace Task2_1_2
                 else throw new ArgumentException("the radius must be greater than 0", nameof(value));
             }
         }
+        public override FigureType Type => FigureType.Round;
         public double Length => 2 * Math.PI * R;
         
         public Round(Point center, double radius)
         {
-            Center = center;
-            R = radius;
-            Type = FigureType.Round;
+            if (radius > 0)
+            {
+                Center = center;
+                R = radius;
+            }
         }
+
         public override string ToString()
         {
-            return new string($"Center={Center} Radius={R}");
+            return new string($"Center={Center} Radius={R} Length={Length}");
         }
     }
 }

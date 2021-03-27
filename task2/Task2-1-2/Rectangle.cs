@@ -7,6 +7,7 @@ namespace Task2_1_2
     public class Rectangle : Figure
     {
         public Line[] Lines { get; private set; }
+        public override FigureType Type => FigureType.Rectangle;
         public FigureType SubType { get; private set; }
         public double Perimeter
         {
@@ -22,35 +23,39 @@ namespace Task2_1_2
         }
         public double Area => Lines[0].Length * Lines[1].Length;
 
-        public Rectangle()
+        
+
+       
+        public Rectangle(Line l1, Line l2, Line l3, Line l4)
         {
-            Type = FigureType.Rectangle;
-        }
-        public Rectangle(Point p1,Point p2,Point p3,Point p4)
-        {
-            var l1 = new Line(p1, p2);
-            var l2 = new Line(p2, p3);
-            var l3 = new Line(p3, p4);
-            var l4 = new Line(p4, p1);
-            if ((l1.Length == l3.Length) && (l2.Length == l4.Length))
+            if (IsValid(l1,l2,l3,l4))
             {
-                if (l1.Length == l2.Length)
+                if (l1.Length == l2.Length && l2.Length==l3.Length&&l3.Length==l4.Length)
                 {
                     SubType = FigureType.Square;
                     Lines = new Line[] { l1, l2, l3, l4 };
-                    Type = FigureType.Rectangle;
                 }
                 else
                 {
                     Lines = new Line[] { l1, l2, l3, l4 };
-                    Type = FigureType.Rectangle;
                     SubType = FigureType.Rectangle;
                 }
             }
+            else throw new Exception("it's not a rectangle!!");
+        }
+        public static bool IsValid(Line l1,Line l2,Line l3, Line l4)
+        {
+            if ((l1.Length + l2.Length + l3.Length) > l4.Length && (l2.Length + l3.Length + l4.Length) > l1.Length
+                && (l1.Length + l3.Length + l4.Length) > l2.Length && (l1.Length + l2.Length + l4.Length) > l3.Length)
+            {
+                return true;
+            }
+            else return false;
+
         }
         public override string ToString()
         {
-            return new string($"{Lines[0].Start} {Lines[1].Start} {Lines[2].Start} {Lines[3].Start}");
+            return new string($"{Lines[0].Start} {Lines[1].Start} {Lines[2].Start} {Lines[3].Start}, Perimeter={Perimeter}, Area={Area}");
         }
     }
 }

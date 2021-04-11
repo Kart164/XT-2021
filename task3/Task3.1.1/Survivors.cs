@@ -12,7 +12,7 @@ namespace Task3._1._1
         public int Count => _people.Count;
         public Survivors(int n)
         {
-            _people = new List<int>(Enumerable.Range(1,n));
+            _people = new List<int>(Enumerable.Range(1, n));
         }
 
         public IEnumerator<int> GetEnumerator()
@@ -29,7 +29,7 @@ namespace Task3._1._1
         {
             int round = 0;
             var enumerator = (SurvivorsEnumerator)GetEnumerator();
-            while (Count>=n)
+            while (Count >= n)
             {
                 for (int i = 0; i < n; i++)
                 {
@@ -46,7 +46,7 @@ namespace Task3._1._1
         }
         public override string ToString()
         {
-            var sb = new StringBuilder(Count*2);
+            var sb = new StringBuilder(Count * 2);
             foreach (var item in _people)
             {
                 sb.Append(item + " ");

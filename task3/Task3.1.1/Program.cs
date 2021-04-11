@@ -12,14 +12,14 @@ namespace Task3._1._1
             //in this task, counter restarts after last deleted person
             Console.WriteLine("Введите N");
             var n = IntInput();
-            var survivors = new Survivors(n) ;
+            var survivors = new Survivors(n);
             Console.WriteLine("Введите, какой по счету человек будет вычеркнут каждый раунд:");
             survivors.StartGame(CrossOutNumberInput(n));
         }
         static int IntInput()
         {
             int res;
-            while(!int.TryParse(Console.ReadLine(), out res) && res > 0)
+            while (!int.TryParse(Console.ReadLine(), out res) && res > 0)
             {
                 Console.WriteLine("Введите значение больше 0");
             }

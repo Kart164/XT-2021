@@ -30,7 +30,7 @@ namespace Task3._1._1
         {
             if (++_curIndex >= _list.Count)
             {
-                _curIndex=0;
+                _curIndex = 0;
                 _current = _list[_curIndex];
                 return true;
             }
@@ -46,7 +46,10 @@ namespace Task3._1._1
             {
                 _curIndex -= 1;
             }
-            else _curIndex = _list.Count - 1;
+            else
+            {
+                _curIndex = _list.Count - 1;
+            }
         }
         public void Reset()
         {

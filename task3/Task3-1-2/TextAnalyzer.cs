@@ -22,14 +22,14 @@ namespace Task3_1_2
         private void DeleteSeparators()
         {
             var regex = new Regex(@"([.,;:!?]+)\s");
-            _text=regex.Replace(_text, " ");
+            _text = regex.Replace(_text, " ");
         }
         public void InitializeDictionary()
         {
             DeleteSeparators();
             var words = _text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             _countOfWords = words.Length;
-            foreach(string word in words)
+            foreach (string word in words)
             {
                 if (!_wordsAndTheirCount.ContainsKey(word))
                 {
@@ -49,7 +49,7 @@ namespace Task3_1_2
             foreach (var word in _wordsAndTheirCount)
             {
                 Console.WriteLine($"{word.Key}\t|\tappeared {word.Value} times");
-                Console.WriteLine(new string('-',50));
+                Console.WriteLine(new string('-', 50));
             }
         }
         public void ShowShortAnalysis()
@@ -62,7 +62,6 @@ namespace Task3_1_2
                     Console.WriteLine($"\"{word.Key}\" appeared {word.Value} times");
                 }
             }
-            
         }
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task3.1.1", "Task3.1.1\Task
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3-1-2", "Task3-1-2\Task3-1-2.csproj", "{2AA5E1F4-CFF5-4FFB-A005-9410CD5CEFC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicArray", "DynamicArray\DynamicArray.csproj", "{7E02F553-0FED-47E2-AF5D-A6DE838CF0BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicArray", "DynamicArray\DynamicArray.csproj", "{7E02F553-0FED-47E2-AF5D-A6DE838CF0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFor3-2", "TestFor3-2\TestFor3-2.csproj", "{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7E02F553-0FED-47E2-AF5D-A6DE838CF0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E02F553-0FED-47E2-AF5D-A6DE838CF0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E02F553-0FED-47E2-AF5D-A6DE838CF0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

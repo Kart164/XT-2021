@@ -29,6 +29,7 @@ namespace SuperArrayAndString
             else throw new ArgumentException("this method cannot work with non-numeric data");
 
         }
+
         /// <summary>
         /// returns the average value among all the elements for this array
         /// </summary>
@@ -43,13 +44,14 @@ namespace SuperArrayAndString
             }
             else throw new ArgumentException("this method cannot work with non-numeric data");
         }
+
         /// <summary>
         /// find all Most Frequent Elements
         /// </summary>
         /// <typeparam name="T">ONLY NUMERIC TYPES</typeparam>
         /// <param name="array"></param>
         /// <returns>returns IEnumerable collection of Most Frequent Elements</returns>
-        public static IEnumerable<T> MostFrequentElement<T>(this T[] array) where T: unmanaged
+        public static IEnumerable<T> MostFrequentElement<T>(this T[] array) where T : unmanaged
         {
             if (IsNumeric(array[0]))
             {
@@ -81,9 +83,7 @@ namespace SuperArrayAndString
             else return true;
         }
 
-
-
-        public static void EachElement<T>(this T[] array, Func<T, T> func) where T: unmanaged
+        public static void EachElement<T>(this T[] array, Func<T, T> func) where T : unmanaged
         {
             if (IsNumeric(array[0]))
             {

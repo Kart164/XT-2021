@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicArray", "DynamicArra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFor3-2", "TestFor3-2\TestFor3-2.csproj", "{0A0897A4-358C-47C7-ABF0-FF5C37AF4AFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperArrayAndString", "SuperArrayAndString\SuperArrayAndString.csproj", "{9428B550-9342-4D38-8450-49F6FB7EAB80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperArrayAndString", "SuperArrayAndString\SuperArrayAndString.csproj", "{9428B550-9342-4D38-8450-49F6FB7EAB80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaTime", "PizzaTime\PizzaTime.csproj", "{6C60ECFA-F774-4E56-B742-4E400FC712E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9428B550-9342-4D38-8450-49F6FB7EAB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9428B550-9342-4D38-8450-49F6FB7EAB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9428B550-9342-4D38-8450-49F6FB7EAB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C60ECFA-F774-4E56-B742-4E400FC712E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C60ECFA-F774-4E56-B742-4E400FC712E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C60ECFA-F774-4E56-B742-4E400FC712E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C60ECFA-F774-4E56-B742-4E400FC712E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

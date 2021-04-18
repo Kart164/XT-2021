@@ -13,6 +13,7 @@ namespace SuperArrayAndString
             {
                 Console.Write($"{item} ");
             }
+            Console.WriteLine();
             var str = "fаrго";
             Console.WriteLine(str.CheckLanguage());
             str = "ffff";

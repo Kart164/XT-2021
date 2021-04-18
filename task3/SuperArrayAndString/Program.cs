@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 namespace SuperArrayAndString
 {
     class Program
@@ -7,12 +7,10 @@ namespace SuperArrayAndString
         static void Main(string[] args)
         {
             double[] arr = { 1, 2, 2, 3, 4, 5, 5 };
-            Console.WriteLine(arr.Median());
-            var arr2 = arr.MostFrequentElement();
-            foreach (var item in arr2)
-            {
-                Console.Write($"{item} ");
-            }
+            Console.WriteLine(arr.Sum());
+            Console.WriteLine(arr.Average());
+            var arr2 = arr.MostFrequentElements();
+            Console.WriteLine(string.Join(' ',arr2));
             Console.WriteLine();
             var str = "fаrго";
             Console.WriteLine(str.CheckLanguage());

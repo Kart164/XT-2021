@@ -8,54 +8,157 @@ namespace SuperArrayAndString
 {
     public static class NumericExtensions
     {
-        /// <summary>
-        /// Returns sum of all elements in array
-        /// </summary>
-        /// <typeparam name="T">WORKS ONLY WITH NUMERIC TYPES</typeparam>
-        /// <param name="array"></param>
-        /// <returns>returns double for the largest data type coverage</returns>
-        public static double SumOfAllelements<T>(this T[] array) where T : unmanaged
+        #region Sum
+        public static double Sum(this int[] array)
         {
-            if (IsNumeric(array[0]))
-            {
-                double sum = 0;
+            double sum = 0;
                 for (int i = 0; i < array.Length; i++)
                 {
-                    double.TryParse(array[i].ToString(), out double temp);
-                    sum += temp;
+                    sum += array[i];
                 }
                 return sum;
-            }
-            else throw new ArgumentException("this method cannot work with non-numeric data");
-
         }
-
-        /// <summary>
-        /// returns the average value among all the elements for this array
-        /// </summary>
-        /// <typeparam name="T">ONLY NUMERIC TYPES!!</typeparam>
-        /// <param name="array"></param>
-        /// <returns>returns double for the largest data type coverage</returns>
-        public static double Median<T>(this T[] array) where T : unmanaged
+        public static double Sum(this short[] array)
         {
-            if (IsNumeric(array[0]))
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
             {
-                return array.SumOfAllelements() / array.Length;
+                sum += array[i];
             }
-            else throw new ArgumentException("this method cannot work with non-numeric data");
+            return sum;
         }
-
-        /// <summary>
-        /// find all Most Frequent Elements
-        /// </summary>
-        /// <typeparam name="T">ONLY NUMERIC TYPES</typeparam>
-        /// <param name="array"></param>
-        /// <returns>returns IEnumerable collection of Most Frequent Elements</returns>
-        public static IEnumerable<T> MostFrequentElement<T>(this T[] array) where T : unmanaged
+        public static double Sum(this ushort[] array)
         {
-            if (IsNumeric(array[0]))
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
             {
-                var dict = new Dictionary<T, int>();
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this byte[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this sbyte[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this uint[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this long[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this ulong[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this float[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this double[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
+        }
+        public static double Sum(this decimal[] array)
+        {
+            double sum = 0;
+            for (int i = 0; i < array.Length; i++)
+            { 
+                sum += Convert.ToDouble(array[i]);
+            }
+            return sum;
+        }
+        #endregion
+        #region Average
+        public static double Average(this byte[] array)
+        {
+                return array.Sum() / array.Length;
+        }
+        public static double Average(this sbyte[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this short[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this ushort[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this int[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this uint[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this long[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this ulong[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this float[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this double[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        public static double Average(this decimal[] array)
+        {
+            return array.Sum() / array.Length;
+        }
+        #endregion
+        #region MostFrequentElement
+        public static IEnumerable<byte> MostFrequentElements(this byte[] array)
+        {
+                var dict = new Dictionary<byte, int>();
                 foreach (var item in array)
                 {
                     if (dict.ContainsKey(item))
@@ -67,26 +170,194 @@ namespace SuperArrayAndString
                         dict.Add(item, 0);
                     }
                 }
-                var querry = from item in dict
-                             where item.Value == dict.Values.Max()
-                             select item.Key;
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x=>x.Key);
                 return querry;
-            }
-            else throw new ArgumentException("this method cannot work with non-numeric data");
         }
-        private static bool IsNumeric<T>(T array) where T : unmanaged
+        public static IEnumerable<sbyte> MostFrequentElements(this sbyte[] array)
         {
-            if (array is char || array is bool)
+            var dict = new Dictionary<sbyte, int>();
+            foreach (var item in array)
             {
-                return false;
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
             }
-            else return true;
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
         }
+        public static IEnumerable<short> MostFrequentElements(this short[] array)
+        {
+            var dict = new Dictionary<short, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<ushort> MostFrequentElements(this ushort[] array)
+        {
+            var dict = new Dictionary<ushort, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<int> MostFrequentElements(this int[] array)
+        {
+            var dict = new Dictionary<int, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<uint> MostFrequentElements(this uint[] array)
+        {
+            var dict = new Dictionary<uint, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<long> MostFrequentElements(this long[] array)
+        {
+            var dict = new Dictionary<long, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<ulong> MostFrequentElements(this ulong[] array)
+        {
+            var dict = new Dictionary<ulong, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<float> MostFrequentElements(this float[] array)
+        {
+            var dict = new Dictionary<float, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<double> MostFrequentElements(this double[] array)
+        {
+            var dict = new Dictionary<double, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        public static IEnumerable<decimal> MostFrequentElements(this decimal[] array)
+        {
+            var dict = new Dictionary<decimal, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    dict[item]++;
+                }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
+            var maxCount = dict.Values.Max();
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
+        }
+        #endregion
 
         public static void EachElement<T>(this T[] array, Func<T, T> func) where T : unmanaged
         {
-            if (IsNumeric(array[0]))
-            {
                 if (func != null)
                 {
                     for (int i = 0; i < array.Length; i++)
@@ -94,7 +365,6 @@ namespace SuperArrayAndString
                         array[i] = func.Invoke(array[i]);
                     }
                 }
-            }
         }
     }
 }

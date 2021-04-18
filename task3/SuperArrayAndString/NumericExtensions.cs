@@ -12,11 +12,11 @@ namespace SuperArrayAndString
         public static double Sum(this int[] array)
         {
             double sum = 0;
-                for (int i = 0; i < array.Length; i++)
-                {
-                    sum += array[i];
-                }
-                return sum;
+            for (int i = 0; i < array.Length; i++)
+            {
+                sum += array[i];
+            }
+            return sum;
         }
         public static double Sum(this short[] array)
         {
@@ -103,7 +103,7 @@ namespace SuperArrayAndString
         {
             double sum = 0;
             for (int i = 0; i < array.Length; i++)
-            { 
+            {
                 sum += Convert.ToDouble(array[i]);
             }
             return sum;
@@ -112,7 +112,7 @@ namespace SuperArrayAndString
         #region Average
         public static double Average(this byte[] array)
         {
-                return array.Sum() / array.Length;
+            return array.Sum() / array.Length;
         }
         public static double Average(this sbyte[] array)
         {
@@ -158,21 +158,21 @@ namespace SuperArrayAndString
         #region MostFrequentElement
         public static IEnumerable<byte> MostFrequentElements(this byte[] array)
         {
-                var dict = new Dictionary<byte, int>();
-                foreach (var item in array)
+            var dict = new Dictionary<byte, int>();
+            foreach (var item in array)
+            {
+                if (dict.ContainsKey(item))
                 {
-                    if (dict.ContainsKey(item))
-                    {
-                        dict[item]++;
-                    }
-                    else
-                    {
-                        dict.Add(item, 0);
-                    }
+                    dict[item]++;
                 }
+                else
+                {
+                    dict.Add(item, 0);
+                }
+            }
             var maxCount = dict.Values.Max();
-            var querry = dict.Where(x => x.Value == maxCount).Select(x=>x.Key);
-                return querry;
+            var querry = dict.Where(x => x.Value == maxCount).Select(x => x.Key);
+            return querry;
         }
         public static IEnumerable<sbyte> MostFrequentElements(this sbyte[] array)
         {
@@ -358,13 +358,13 @@ namespace SuperArrayAndString
 
         public static void EachElement<T>(this T[] array, Func<T, T> func) where T : unmanaged
         {
-                if (func != null)
+            if (func != null)
+            {
+                for (int i = 0; i < array.Length; i++)
                 {
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        array[i] = func.Invoke(array[i]);
-                    }
+                    array[i] = func.Invoke(array[i]);
                 }
+            }
         }
     }
 }

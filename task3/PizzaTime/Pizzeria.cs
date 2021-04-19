@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaTime.PizzaEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,17 +14,20 @@ namespace PizzaTime
 
         private char _charOfOrderId;
         private int _orderCounter;
+
+        public PizzaCollection Menu { get; private set; }
         public List<Order> AcceptedOrders { get; private set; }
         public List<Order> OrdersOnGive { get; private set; }
 
         public Pizzeria()
         {
-            var rand = new Random();
             _charOfOrderId = 'A';
             _orderCounter = 0;
             AcceptedOrders = new List<Order>();
             OrdersOnGive = new List<Order>();
+            Menu = new PizzaCollection();
         }
+
         public void TakeOrder(Order order)
         {
             order.SetID(new string(_charOfOrderId+_orderCounter.ToString()));

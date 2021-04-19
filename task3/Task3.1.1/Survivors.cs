@@ -31,12 +31,11 @@ namespace Task3._1._1
             var enumerator = (SurvivorsEnumerator)GetEnumerator();
             while (Count >= n)
             {
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < n-1; i++)
                 {
                     enumerator.MoveNext();
                 }
-                _people.Remove(enumerator.Current);
-                enumerator.GoBackOnStep();
+                _people.Remove(_people[enumerator.CurIndex+1]);
                 round++;
                 Console.WriteLine($"Раунд {round}. Вычеркнут человек. Людей осталось: {Count}");
                 Console.WriteLine(ToString());

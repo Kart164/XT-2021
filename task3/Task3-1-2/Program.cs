@@ -11,26 +11,25 @@ namespace Task3_1_2
             var analyzer = new TextAnalyzer(ArticleInput());
             analyzer.InitializeDictionary();
             var exit = false;
-            int inp;
             while (!exit)
             {
                 PrintMenu();
-                while (!int.TryParse(Console.ReadLine(), out inp) || inp > 3 || inp < 1)
-                {
-                    Console.WriteLine("Enter a number between 1 and 3:");
-                }
+                int.TryParse(Console.ReadLine(), out int inp);
                 switch (inp)
                 {
                     case 1:
                         Console.Clear();
-                        analyzer.ShowFullAnalysis();
+                        ShowFullAnalysis(analyzer);
                         break;
                     case 2:
                         Console.Clear();
-                        analyzer.ShowShortAnalysis();
+                        ShowShortAnalysis(analyzer);
                         break;
                     case 3:
                         exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Enter a number between 1 and 3:");
                         break;
                 }
             }
@@ -41,18 +40,11 @@ namespace Task3_1_2
             Console.WriteLine("enter text:");
             string str;
             var sb = new StringBuilder();
-            var escape = false;
-            while (!escape)
+            while (true)
             {
                 str = Console.ReadLine();
-                if (str != "stop")
-                {
-                    sb.Append(str + " ");
-                }
-                else
-                {
-                    escape = true;
-                }
+                if (string.IsNullOrWhiteSpace(str)) break;
+                sb.Append(str + " ");
             }
             return sb.ToString();
         }
@@ -60,7 +52,7 @@ namespace Task3_1_2
         {
             Console.WriteLine("Hi, I am a program that analyzes the text for the monotony of the language." +
                 Environment.NewLine + "To start you should enter your article." + Environment.NewLine +
-                "To finish the input process press button \"enter\" and enter the stop.");
+                "To finish the input process press button \"enter\" and enter the empty line.");
         }
         static void PrintMenu()
         {
@@ -69,6 +61,24 @@ namespace Task3_1_2
                 "\t2. Show Short Analysis" + Environment.NewLine +
                 "\t3. Exit" + Environment.NewLine +
                 "enter a number of action:");
+        }
+        static void ShowFullAnalysis(TextAnalyzer analyzer)
+        {
+            Console.WriteLine("Word\t|\tnumber of appearances");
+            Console.WriteLine(new string('-', 50));
+            foreach (var word in analyzer.GetFullAnalysis())
+            {
+                Console.WriteLine($"{word.Key}\t|\tappeared {word.Value} times");
+                Console.WriteLine(new string('-', 50));
+            }
+        }
+        static void ShowShortAnalysis(TextAnalyzer analyzer)
+        {
+            Console.WriteLine("the text is good, but please replace the following words due to frequent use:");
+            foreach (var word in analyzer.GetShortAnalysis())
+            {
+                Console.WriteLine($"\"{word.Key}\" appeared {word.Value} times");
+            }
         }
     }
 }

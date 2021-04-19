@@ -37,7 +37,7 @@ namespace TestFor3_2
             }
             Console.WriteLine();
 
-            Console.WriteLine(dynamic[-1]);
+            Console.WriteLine(dynamic[-0]);
             Console.WriteLine(dynamic.ToString());
         }
     }

@@ -19,42 +19,11 @@ namespace DynamicArray
                 ChangeCapacity(value);
             }
         }
-        /// <summary>
-        /// this method allows you to change the capacity of the array. If you set the capacity less 
-        /// than the current one, some of the data will be deleted
-        /// </summary>
-        /// <param name="value">new capacity</param>
-        private void ChangeCapacity(int value)
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentException("capacity can't be negative or equalss 0", nameof(value));
-            }
-            else
-            {
-                if (value > Capacity)
-                {
-                    var arr = new T[value];
-                    _array.CopyTo(arr, 0);
-                    _array = arr;
-                }
-                else
-                {
-                    var arr = new T[value];
-                    for (int i = 0; i < value; i++)
-                    {
-                        arr[i] = _array[i];
-                    }
-                    _array = arr;
-                    Length = arr.Length;
-                }
-            }
-        }
+
 
         #region ctors
-        public DynamicArray()
+        public DynamicArray() : this(8)
         {
-            _array = new T[8];
             Length = 0;
         }
         public DynamicArray(int capacity)
@@ -64,16 +33,13 @@ namespace DynamicArray
         }
         public DynamicArray(IEnumerable<T> array)
         {
-            _array = new T[array.Count()];
-            int i = 0;
-            foreach (var item in array)
-            {
-                _array[i] = item;
-                i++;
-            }
-            Length = i;
+            var arr = array.ToArray();
+            _array = new T[arr.Length];
+            Array.Copy(arr, _array, arr.Length);
+            Length = arr.Length;
         }
         #endregion
+
         public void Add(T item)
         {
             if (Length == Capacity)
@@ -83,30 +49,27 @@ namespace DynamicArray
             _array[Length] = item;
             Length++;
         }
+
         public void AddRange(IEnumerable<T> array)
         {
-            var arrCount = array.Count();
-            if (arrCount + Length > Capacity)
+            var arr = array.ToArray();
+            if (arr.Length + Length > Capacity)
             {
-                Capacity += arrCount + Length;
+                Capacity += arr.Length + 8;
             }
-            foreach (var item in array)
-            {
-                _array[Length] = item;
-                Length++;
-            }
-            Length--;
+            Array.Copy(arr, 0, _array, Length, arr.Length);
+            Length += arr.Length;
         }
 
         public bool Remove(T elem)
         {
             var oldLength = Length;
-            while (_array.Contains<T>(elem))
+            int index = Array.IndexOf(_array, elem);
+            while (index > -1)
             {
-                int index = Array.IndexOf(_array, elem);
                 Array.Copy(_array, index + 1, _array, index, Length - index - 1);
-                _array[Length - 1] = default;
                 Length--;
+                index = Array.IndexOf(_array, elem);
             }
             if (oldLength == Length)
             {
@@ -120,25 +83,15 @@ namespace DynamicArray
 
         public bool Insert(T elem, int index)
         {
-            if (Math.Abs(index) > Length)
+            index = IndexResolver(index) + 1;
+            if (Length + 1 > Capacity)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), $"{nameof(index)} outside the array boundary");
+                Capacity *= 2;
             }
-            else
-            {
-                if (Length + 1 > Capacity)
-                {
-                    Capacity *= 2;
-                }
-                if (index < 0)
-                {
-                    index += Length;
-                }
-                Array.Copy(_array, index, _array, index + 1, Length - index);
-                _array[index] = elem;
-                Length++;
-                return true;
-            }
+            Array.Copy(_array, index, _array, index + 1, Length - index);
+            _array[index] = elem;
+            Length++;
+            return true;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -173,36 +126,62 @@ namespace DynamicArray
         {
             get
             {
-                if (Math.Abs(i) > Length - 1)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                else
-                {
-                    if (i < 0)
-                    {
-                        i += Length;
-                    }
-                    return _array[i];
-                }
+                i = IndexResolver(i);
+                return _array[i];
             }
             set
             {
-                if (Math.Abs(i) > Length - 1)
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                else
-                {
-                    if (i < 0)
-                    {
-                        i += Length - 1;
-                    }
-                    _array[i] = value;
-                }
+                i = IndexResolver(i);
+                _array[i] = value;
             }
         }
 
+        /// <summary>
+        /// this method allows you to change the capacity of the array. If you set the capacity less 
+        /// than the current one, some of the data will be deleted
+        /// </summary>
+        /// <param name="value">new capacity</param>
+        private void ChangeCapacity(int value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentException("capacity can't be negative or equalss 0", nameof(value));
+            }
+            else
+            {
+                if (value > Capacity)
+                {
+                    var arr = new T[value];
+                    _array.CopyTo(arr, 0);
+                    _array = arr;
+                }
+                else
+                {
+                    var arr = new T[value];
+                    Array.Copy(_array, arr, value);
+                    _array = arr;
+                    Length = arr.Length;
+                }
+            }
+        }
+        private int IndexResolver(int i)
+        {
+            if (Math.Abs(i) >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                if (i >= 0)
+                {
+                    return i;
+                }
+                else
+                {
+                    return Length + i - 1;
+                }
+            }
+        }
 
     }
 }

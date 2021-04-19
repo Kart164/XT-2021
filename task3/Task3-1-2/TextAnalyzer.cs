@@ -42,26 +42,21 @@ namespace Task3_1_2
             }
         }
 
-        public void ShowFullAnalysis()
+        public Dictionary<string, int> GetFullAnalysis()
         {
-            Console.WriteLine("Word\t|\tnumber of appearances");
-            Console.WriteLine(new string('-', 50));
-            foreach (var word in _wordsAndTheirCount)
-            {
-                Console.WriteLine($"{word.Key}\t|\tappeared {word.Value} times");
-                Console.WriteLine(new string('-', 50));
-            }
+            return _wordsAndTheirCount;
         }
-        public void ShowShortAnalysis()
+        public Dictionary<string, int> GetShortAnalysis()
         {
-            Console.WriteLine("the text is good, but please replace the following words due to frequent use:");
+            var dict = new Dictionary<string, int>();
             foreach (var word in _wordsAndTheirCount)
             {
                 if ((word.Value / (double)_countOfWords) * 100 > 1)
                 {
-                    Console.WriteLine($"\"{word.Key}\" appeared {word.Value} times");
+                    dict.Add(word.Key, word.Value);
                 }
             }
+            return dict;
         }
     }
 }

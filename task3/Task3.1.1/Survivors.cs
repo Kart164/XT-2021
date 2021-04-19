@@ -45,12 +45,7 @@ namespace Task3._1._1
         }
         public override string ToString()
         {
-            var sb = new StringBuilder(Count * 2);
-            foreach (var item in _people)
-            {
-                sb.Append(item + " ");
-            }
-            return sb.ToString();
+            return string.Join(' ', _people);
         }
     }
 }

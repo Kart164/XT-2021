@@ -13,7 +13,12 @@ namespace VCS
 
         public Commit()
         {
-            Changes = new List<Change>();
+
         }
+        public Commit(List<Change> list)
+        {
+            Changes = list;
+        }
+
     }
 }

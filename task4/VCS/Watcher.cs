@@ -28,7 +28,7 @@ namespace VCS
             watcher.Created += OnCreated;
             watcher.Deleted += OnDeleted;
             watcher.Renamed += OnRenamed;
-            Commit = new Commit();
+            Commit = new Commit(new List<Change>());
             lastChange = DateTime.MinValue;
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace VCS
 {
@@ -6,7 +7,9 @@ namespace VCS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Storage.SetDirectory(@"C:\Programing\task4\watch");
+            var watcher = new Watcher();
+            while (string.IsNullOrWhiteSpace(Console.ReadLine())) ;
         }
     }
 }

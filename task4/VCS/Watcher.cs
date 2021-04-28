@@ -39,7 +39,6 @@ namespace VCS
             if (lastWriteTime != lastChange)
             {
                 Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
-
                 lastChange = lastWriteTime;
                 Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, lastWriteTime));
             }
@@ -91,9 +90,17 @@ namespace VCS
         }
         #endregion
 
-        public void End()
+        public void SaveCommit(Logger logger)
         {
-            //TODO: dispose filewatcher and log commit
+            Commit.DateTimeOfCommit = DateTime.Now;
+            logger.AddCommit(Commit);
+        }
+        public void End(Logger logger, bool saveLastChanges)
+        {
+            if(saveLastChanges)
+                SaveCommit(logger);
+            logger.SaveCommits();
+            watcher.Dispose();
         }
     }
 }

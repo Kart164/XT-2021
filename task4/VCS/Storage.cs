@@ -21,7 +21,7 @@ namespace VCS
         {
             DirectoryToWatch = path;
             Log = Directory.GetParent(path) + @"\Log.json";
-            InitialLog = Directory.GetParent(path) + @"InitialLog.json";
+            InitialLog = Directory.GetParent(path) + @"\InitialLog.json";
         }
     }
 }

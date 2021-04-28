@@ -9,7 +9,11 @@ namespace VCS
         {
             Storage.SetDirectory(@"C:\Programing\task4\watch");
             var watcher = new Watcher();
-            while (string.IsNullOrWhiteSpace(Console.ReadLine())) ;
+            var logger = new Logger();
+            logger.SaveStartStateToJson();
+            logger.ReadCommits();
+            while (Console.ReadLine() != "commit") ;
+            watcher.End(logger,true);
         }
     }
 }

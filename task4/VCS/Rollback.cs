@@ -24,6 +24,8 @@ namespace VCS
                     switch (change.ChangeType)
                     {
                         case WatcherChangeTypes.Created:
+                            if (!Directory.Exists(Path.GetDirectoryName(change.FilePath)))
+                                Directory.CreateDirectory(Path.GetDirectoryName(change.FilePath));
                             File.Create(change.FilePath);
                             break;
                         case WatcherChangeTypes.Changed:
@@ -34,7 +36,7 @@ namespace VCS
                             File.Delete(change.FilePath);
                             break;
                         case WatcherChangeTypes.Renamed:
-                            File.Copy(change.OldFullPath, change.FilePath);
+                            File.Copy(change.OldFullPath,change.FilePath);
                             File.Delete(change.OldFullPath);
                             break;
                     }

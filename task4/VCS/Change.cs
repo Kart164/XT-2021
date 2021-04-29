@@ -24,8 +24,9 @@ namespace VCS
             FilePath = filePath;
             ChangeType = typeOfChange;
             DateTimeOfChange = dateTime;
-            if(typeOfChange==WatcherChangeTypes.Changed)
+            if (typeOfChange == WatcherChangeTypes.Changed)
                 FileContent = File.ReadAllText(filePath);
+            else FileContent=null;
         }
         public Change(string filePath,string oldPath, WatcherChangeTypes typeOfChange, DateTime dateTime)
         {
@@ -33,7 +34,7 @@ namespace VCS
             ChangeType = typeOfChange;
             DateTimeOfChange = dateTime;
             OldFullPath = oldPath;
-            FileContent = string.Empty;
+            FileContent = File.ReadAllText(filePath);
         }
     }
 }

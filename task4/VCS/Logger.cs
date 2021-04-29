@@ -30,6 +30,10 @@ namespace VCS
                     InitialFileList.Add(new MyFile(file, File.ReadAllText(file)));
                 }
                 var json = JsonSerializer.Serialize(InitialFileList, new JsonSerializerOptions { WriteIndented = true });
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    File.WriteAllText(Storage.InitialLog, "{}");
+                }
                 File.WriteAllText(Storage.InitialLog, json);
             }
             else

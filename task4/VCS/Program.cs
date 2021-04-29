@@ -12,9 +12,9 @@ namespace VCS
                 $"in the format C:\\folder\\directoryToWatch:");
             var regex = new Regex(@"[A-Z]:[\\\w]+");
             var path = Console.ReadLine();
-            while (!regex.IsMatch(path))
+            while (!regex.IsMatch(path) && !Directory.Exists(path))
             {
-                Console.WriteLine("WRONG FORMAT!!!! try again...");
+                Console.WriteLine("WRONG FORMAT or directory doesn't exist!!!! try again...");
                 path = Console.ReadLine();
             }
             Storage.SetDirectory(path);
@@ -32,7 +32,7 @@ namespace VCS
                         StartMonitoring(logger);
                         break;
                     case 2:
-                        //todo: rollback menu
+                        RollBackActions(logger);
                         break;
                     case 3:
                         escape = true;
@@ -90,6 +90,40 @@ namespace VCS
                         isStoped = true;
                         break;
                 }
+            }
+        }
+
+        static void RollBackActions(Logger logger)
+        {
+            Console.WriteLine("1. RollBack to base state"+ Environment.NewLine+
+                "2. Rollback to Commit"+Environment.NewLine+"3. Exit");
+            var str = Console.ReadLine();
+            int res;
+            while(!int.TryParse(str, out res)|| res>3 || res<1 )
+            {
+                Console.WriteLine("enter 1 or 2 or 3");
+                str = Console.ReadLine();
+            }
+            switch (res)
+            {
+                case 1:
+                    Rollback.RollBackToInitialState(logger);
+                    break;
+                case 2:
+                    Console.WriteLine("enter index of commit:");
+                    for(int i=0; i<logger.Commits.Count;i++)
+                    {
+                        Console.WriteLine($"{i}. {logger.Commits[i].DateTimeOfCommit}");
+                    }
+                    int index;
+                    str = Console.ReadLine();
+                    while (!int.TryParse(str, out index) || res >=logger.Commits.Count || res < 0)
+                    {
+                        Console.WriteLine($"enter number between 0 and {logger.Commits.Count}");
+                        str = Console.ReadLine();
+                    }
+                    Rollback.MakeRollBack(res, logger);
+                    break;
             }
         }
     }

@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace VCS
 {
+    /// <summary>
+    /// Class to save changes to build all of them to one commit and for serializing into json
+    /// </summary>
     public class Change
     {
-        public string FilePath { get; set; }
-        public string OldFullPath { get; set; }
-        public WatcherChangeTypes ChangeType {get; set; }
-        public DateTime DateTimeOfChange { get; set; }
-        public string FileContent { get; set; }
+        public string FilePath { get; init; }
+        public string OldFullPath { get; init; }
+        public WatcherChangeTypes ChangeType {get; init; }
+        public DateTime DateTimeOfChange { get; init; }
+        public string FileContent { get;init; }
 
         public Change()
         {
@@ -24,7 +27,7 @@ namespace VCS
             FilePath = filePath;
             ChangeType = typeOfChange;
             DateTimeOfChange = dateTime;
-            if (typeOfChange == WatcherChangeTypes.Changed)
+            if (typeOfChange == WatcherChangeTypes.Changed || typeOfChange == WatcherChangeTypes.Created)
                 FileContent = File.ReadAllText(filePath);
             else FileContent=null;
         }

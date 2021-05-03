@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace VCS
 {
+    /// <summary>
+    /// A class that monitors the file system
+    /// </summary>
     public class Watcher
     {
-        private FileSystemWatcher watcher;
-        public Commit Commit { get; private set; }
         private DateTime lastChange;
+        private FileSystemWatcher watcher;
+
+        public Action<string> ChangeHandler;
+        public Commit Commit { get; private set; }
+        
         public Watcher()
         {
             watcher = new FileSystemWatcher
@@ -38,33 +44,32 @@ namespace VCS
             var lastWriteTime = File.GetLastWriteTime(file.FullPath);
             if (lastWriteTime != lastChange)
             {
-                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                ChangeHandler?.Invoke($"File: {file.FullPath} {file.ChangeType}");
                 lastChange = lastWriteTime;
                 Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, lastWriteTime));
             }
         }
         private void OnRenamed(object source, RenamedEventArgs file)
         {
-            Console.WriteLine($"File: {file.OldFullPath} renamed to {file.FullPath}");
+            ChangeHandler?.Invoke($"File: {file.OldFullPath} renamed to {file.FullPath}");
             Commit.Changes.Add(new Change(file.FullPath, file.OldFullPath, file.ChangeType, DateTime.Now));
         }
         private void OnDeleted(object source, FileSystemEventArgs file)
         {
             if (Commit.Changes.Count > 0)
             {
-                if ((Commit.Changes[^1].ChangeType == WatcherChangeTypes.Deleted &&
-                    Commit.Changes[^1].FilePath == file.FullPath) ||
-                    (Commit.Changes[^1].ChangeType == WatcherChangeTypes.Created &&
-                    Commit.Changes[^1].FilePath == file.FullPath)) { }
+                if ((Commit.Changes[^1].ChangeType == WatcherChangeTypes.Deleted ||
+                    Commit.Changes[^1].ChangeType == WatcherChangeTypes.Created)
+                     && Commit.Changes[^1].FilePath == file.FullPath) { }
                 else
                 {
-                    Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                    ChangeHandler?.Invoke($"File: {file.FullPath} {file.ChangeType}");
                     Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, DateTime.Now));
                 }
             }
             else
             {
-                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                ChangeHandler?.Invoke($"File: {file.FullPath} {file.ChangeType}");
                 Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, DateTime.Now));
             }
         }
@@ -72,19 +77,19 @@ namespace VCS
         {
             if (Commit.Changes.Count>0)
             {
-                if ((Commit.Changes[^1].ChangeType == WatcherChangeTypes.Deleted &&
-                    Commit.Changes[^1].FilePath == file.FullPath) || 
-                    (Commit.Changes[^1].ChangeType==WatcherChangeTypes.Created && 
-                    Commit.Changes[^1].FilePath==file.FullPath)) {}
+                if ((Commit.Changes[^1].ChangeType == WatcherChangeTypes.Deleted ||
+                    Commit.Changes[^1].ChangeType == WatcherChangeTypes.Created)
+                     && Commit.Changes[^1].FilePath == file.FullPath) { }
                 else
                 {
-                    Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                    ChangeHandler?.Invoke($"File: {file.FullPath} {file.ChangeType}");
                     Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, DateTime.Now));
                 }
+                
             }
             else
             {
-                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                ChangeHandler?.Invoke($"File: {file.FullPath} {file.ChangeType}");
                 Commit.Changes.Add(new Change(file.FullPath, file.ChangeType, DateTime.Now));
             }
         }
@@ -92,10 +97,12 @@ namespace VCS
 
         public void SaveCommit(Logger logger)
         {
-            Commit.DateTimeOfCommit = DateTime.Now;
+            Commit.DateTimeOfCommit = new DateTime(DateTime.Now.Ticks);
             logger.AddCommit(Commit);
+            Commit=new Commit(new List<Change>());
         }
-        public void End(Logger logger, bool saveLastChanges)
+
+        public void EndMonitoring(Logger logger, bool saveLastChanges)
         {
             if(saveLastChanges)
                 SaveCommit(logger);

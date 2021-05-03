@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace VCS
 {
+    /// <summary>
+    /// Class that saves all changes in files
+    /// </summary>
     public class Commit
     {
         public List<Change> Changes { get; set; }
@@ -18,6 +21,11 @@ namespace VCS
         public Commit(List<Change> list)
         {
             Changes = list;
+        }
+        public Commit(List<Change>list, DateTime dateTimeOfCommit)
+        {
+            Changes = list;
+            DateTimeOfCommit = dateTimeOfCommit;
         }
 
         

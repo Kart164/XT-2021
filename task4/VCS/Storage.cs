@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace VCS
 {
@@ -12,11 +7,14 @@ namespace VCS
     /// </summary>
     public static class Storage
     {
-
         public static string DirectoryToWatch { get; private set; }
-        public static string InitialLog { get; private set; }       
-        public static string Log { get; private set;  }
+        public static string InitialLog { get; private set; }
+        public static string Log { get; private set; }
 
+        /// <summary>
+        /// Method to set Directory to watch, and automatic set for Log and initial log
+        /// </summary>
+        /// <param name="path">Directory to watch</param>
         public static void SetDirectory(string path)
         {
             DirectoryToWatch = path;

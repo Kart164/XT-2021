@@ -45,15 +45,16 @@ namespace VCS
         }
         static void PrintMenu()
         {
-            Console.WriteLine("Chose mode:"+ Environment.NewLine+ "\t1. Monitoring mode"
-                +Environment.NewLine+"\t2. Rollback mode"+
-                Environment.NewLine+"\t3. Exit");
+            Console.WriteLine("Chose mode:" + Environment.NewLine + "\t1. Monitoring mode"
+                + Environment.NewLine + "\t2. Rollback mode" +
+                Environment.NewLine + "\t3. Exit");
         }
 
         static void StartMonitoring(Logger logger)
         {
             Console.WriteLine("write \"commit\" to save changes, or write \"stop\" to end monitoring ");
             var watcher = new Watcher();
+            watcher.ChangeHandler += PrintEventInfo;
             var escape = false;
             while (!escape)
             {
@@ -65,8 +66,6 @@ namespace VCS
                         break;
                     case "stop":
                         StopMonitoring(logger, watcher);
-                        break;
-                    default:
                         escape = true;
                         break;
                 }
@@ -82,11 +81,11 @@ namespace VCS
                 switch (choose)
                 {
                     case "yes":
-                        watcher.End(logger, true);
+                        watcher.EndMonitoring(logger, true);
                         isStoped = true;
                         break;
                     case "no":
-                        watcher.End(logger, false);
+                        watcher.EndMonitoring(logger, false);
                         isStoped = true;
                         break;
                 }
@@ -95,11 +94,11 @@ namespace VCS
 
         static void RollBackActions(Logger logger)
         {
-            Console.WriteLine("1. RollBack to base state"+ Environment.NewLine+
-                "2. Rollback to Commit"+Environment.NewLine+"3. Exit");
+            Console.WriteLine("1. RollBack to base state" + Environment.NewLine +
+                "2. Rollback to Commit" + Environment.NewLine + "3. Exit");
             var str = Console.ReadLine();
             int res;
-            while(!int.TryParse(str, out res)|| res>3 || res<1 )
+            while (!int.TryParse(str, out res) || res > 3 || res < 1)
             {
                 Console.WriteLine("enter 1 or 2 or 3");
                 str = Console.ReadLine();
@@ -111,13 +110,13 @@ namespace VCS
                     break;
                 case 2:
                     Console.WriteLine("enter index of commit:");
-                    for(int i=0; i<logger.Commits.Count;i++)
+                    for (int i = 0; i < logger.Commits.Count; i++)
                     {
                         Console.WriteLine($"{i}. {logger.Commits[i].DateTimeOfCommit}");
                     }
                     int index;
                     str = Console.ReadLine();
-                    while (!int.TryParse(str, out index) || res >=logger.Commits.Count || res < 0)
+                    while (!int.TryParse(str, out index) || res >= logger.Commits.Count || res < 0)
                     {
                         Console.WriteLine($"enter number between 0 and {logger.Commits.Count}");
                         str = Console.ReadLine();
@@ -125,6 +124,11 @@ namespace VCS
                     Rollback.MakeRollBack(res, logger);
                     break;
             }
+        }
+
+        static void PrintEventInfo(string str)
+        {
+            Console.WriteLine(str);
         }
     }
 }

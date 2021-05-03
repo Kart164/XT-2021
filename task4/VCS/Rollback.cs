@@ -26,21 +26,28 @@ namespace VCS
                         case WatcherChangeTypes.Created:
                             if (!Directory.Exists(Path.GetDirectoryName(change.FilePath)))
                                 Directory.CreateDirectory(Path.GetDirectoryName(change.FilePath));
-                            File.Create(change.FilePath);
+                            File.Create(change.FilePath).Dispose();
                             break;
+
                         case WatcherChangeTypes.Changed:
                             File.Delete(change.FilePath);
                             File.WriteAllText(change.FilePath, change.FileContent);
                             break;
+
                         case WatcherChangeTypes.Deleted:
                             File.Delete(change.FilePath);
                             break;
+
                         case WatcherChangeTypes.Renamed:
                             File.Copy(change.OldFullPath,change.FilePath);
                             File.Delete(change.OldFullPath);
                             break;
                     }
                 }
+            }
+            for (int i = index+1; i < logger.Commits.Count; i++)
+            {
+                logger.Commits.RemoveAt(i);
             }
         }
         public static void RollBackToInitialState(Logger logger)

@@ -1,0 +1,33 @@
+button, label{
+    cursor: pointer;
+}
+#form-header p{
+    padding-left: 15px;
+}
+form{
+    width: 400px;    
+    border: 3px solid #00669c;
+    background: #0b9de0;
+    color: white;
+    text-align: left; 
+    font: 16px sans-serif;    
+}
+.email-block input{
+    width: 320px;
+}
+.email-block{
+    margin: 20px 15px 20px;
+}
+.inline{
+    display: inline-block;
+    margin-left: 15px;
+}
+.inline input{
+    width: 146px;
+}
+button{
+    background-color: #f3d374;
+    border: none;
+    margin: 20px 15px; 
+    padding: 5px;
+}

@@ -1,0 +1,16 @@
+.menu{
+    background-color: burlywood;
+    width: 200px;
+    box-shadow: 5px 5px  brown;
+    border-radius: 15px;
+    border: solid 1px black;
+}
+ul{
+    margin: 10px 0px;
+    padding-left:3px;
+}
+li{
+    padding: 3px 0px;
+    color:brown;
+    list-style-type: none;
+}
